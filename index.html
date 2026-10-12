@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hôtel Le Grand Horizon - Accueil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- En-tête -->
+    <header>
+        <div class="logo"> Le Grand Horizon</div>
+        <nav>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#chambres">Chambres</a></li>
+                <li><a href="Service.html">Service</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Bannière Hero -->
+    <section class="hero" id="accueil">
+        <h1>Vivez une expérience inoubliable</h1>
+        <p>Découvrez le confort et le luxe au cœur de notre établissement.</p>
+    </section>
+
+    <!-- Barre de recherche / Réservation rapide -->
+    <div class="search-box">
+        <div class="search-field">
+            <label for="checkin">Arrivée</label>
+            <input type="date" id="checkin" required>
+        </div>
+        <div class="search-field">
+            <label for="checkout">Départ</label>
+            <input type="date" id="checkout" required>
+        </div>
+        <div class="search-field">
+            <label for="guests">Voyageurs</label>
+            <select id="guests">
+                <option value="1">1 Adulte</option>
+                <option value="2" selected>2 Adultes</option>
+                <option value="3">3 Adultes</option>
+                <option value="4">Famille (4+)</option>
+            </select>
+        </div>
+        <div class="search-field">
+            <label for="room">Chambre</label>
+            <select id="room" required>
+                <option value="" selected disabled>Choisir une chambre</option>
+                <option value="Chambre Standard">Chambre Standard</option>
+                <option value="Chambre Deluxe">Chambre Deluxe</option>
+                <option value="Suite Royale">Suite Royale</option>
+            </select>
+        </div>
+        <button class="btn" type="button" onclick="verifierDisponibilite()">Continuer</button>
+        <p class="booking-status" id="booking-status" aria-live="polite"></p>
+        <form class="booking-confirmation" id="booking-confirmation" hidden>
+            <div class="booking-confirmation-heading">
+                <h3>Vos coordonnées</h3>
+                <p>La demande sera préparée pour l’envoyer à l’accueil sur WhatsApp.</p>
+            </div>
+            <div class="search-field">
+                <label for="guest-name">Nom complet</label>
+                <input id="guest-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="search-field">
+                <label for="guest-phone">Votre numéro de téléphone</label>
+                <input id="guest-phone" name="phone" type="tel" autocomplete="tel" required>
+            </div>
+            <button class="btn booking-submit" type="submit">Préparer la demande WhatsApp</button>
+        </form>
+        <a class="booking-message-link" id="booking-whatsapp-link" target="_blank" rel="noopener noreferrer" hidden>Ouvrir WhatsApp pour envoyer la demande</a>
+        <a class="booking-message-link" id="booking-email-link" hidden>Envoyer la demande par e-mail</a>
+    </div>
+
+    <!-- Section Chambres -->
+    <div class="container" id="chambres">
+        <div class="section-title">
+            <h2>Nos Chambres & Suites</h2>
+            <p>Des espaces conçus pour votre repos et votre bien-être</p>
+        </div>
+
+        <div class="rooms-grid">
+            <!-- Chambre 1 -->
+            <div class="room-card">
+                <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="room-info">
+                    <h3>Chambre Standard</h3>
+                    <p>Idéale pour un séjour de courte durée, lit double confortable, Wi-Fi et douche moderne.</p>
+                    <div class="price">45 000 CDF / nuit</div>
+                    <button class="btn" onclick="reserver('Chambre Standard')">Réserver</button>
+                </div>
+            </div>
+
+            <!-- Chambre 2 -->
+            <div class="room-card">
+                <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="room-info">
+                    <h3>Chambre Deluxe</h3>
+                    <p>Vue magnifique, grand lit king-size, climatisation, mini-bar et espace bureau.</p>
+                    <div class="price">85 000 CDF / nuit</div>
+                    <button class="btn" onclick="reserver('Chambre Deluxe')">Réserver</button>
+                </div>
+            </div>
+
+            <!-- Chambre 3 -->
+            <div class="room-card">
+                <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="room-info">
+                    <h3>Suite Royale</h3>
+                    <p>Le summum du luxe avec salon privé, baignoire spa et services exclusifs inclus.</p>
+                    <div class="price">150 000 CDF / nuit</div>
+                    <button class="btn" onclick="reserver('Suite Royale')">Réserver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="container hotel-gallery" aria-labelledby="gallery-title">
+        <div class="gallery-heading">
+            <div>
+                <p class="gallery-eyebrow">Le Grand Horizon en images</p>
+                <h2 id="gallery-title">Un séjour à votre rythme</h2>
+            </div>
+            <p>Du premier café au bord de la piscine jusqu’au dîner, découvrez les lieux qui rendent chaque séjour unique.</p>
+        </div>
+
+        <div class="gallery-grid">
+            <a class="gallery-photo gallery-photo-hotel" href="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&amp;fit=crop&amp;w=2000&amp;q=90" aria-label="Voir l’hôtel en grand">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Façade élégante d’un hôtel entouré de palmiers" loading="lazy">
+                <figcaption><span>Le lieu</span><h3>L’hôtel</h3></figcaption>
+            </a>
+            <a class="gallery-photo" href="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&amp;fit=crop&amp;w=2000&amp;q=90" aria-label="Voir la plage en grand">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="Plage de sable fin au bord d’une mer turquoise" loading="lazy">
+                <figcaption><span>À proximité</span><h3>La plage</h3></figcaption>
+            </a>
+            <a class="gallery-photo" href="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&amp;fit=crop&amp;w=2000&amp;q=90" aria-label="Voir la piscine en grand">
+                <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="Piscine extérieure aménagée pour la détente" loading="lazy">
+                <figcaption><span>Pause fraîcheur</span><h3>La piscine</h3></figcaption>
+            </a>
+            <a class="gallery-photo" href="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&amp;fit=crop&amp;w=1600&amp;q=90" aria-label="Voir le véhicule en grand">
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&amp;fit=crop&amp;w=800&amp;q=85" alt="Voiture disponible pour les déplacements" loading="lazy">
+                <figcaption><span>Sur la route</span><h3>Le transport</h3></figcaption>
+            </a>
+            <a class="gallery-photo" href="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&amp;fit=crop&amp;w=1600&amp;q=90" aria-label="Voir l’espace d’accueil en grand">
+                <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&amp;fit=crop&amp;w=800&amp;q=85" alt="Espace d’accueil chaleureux et lumineux" loading="lazy">
+                <figcaption><span>À votre écoute</span><h3>Nos services</h3></figcaption>
+            </a>
+            <a class="gallery-photo gallery-photo-restaurant" href="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&amp;fit=crop&amp;w=2000&amp;q=90" aria-label="Voir le restaurant en grand">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Restaurant élégant avec une table dressée pour le dîner" loading="lazy">
+                <figcaption><span>Saveurs du jour</span><h3>Le restaurant</h3></figcaption>
+            </a>
+        </div>
+    </section>
+
+    <dialog class="image-viewer" aria-label="Photo agrandie">
+        <button class="image-viewer-close" type="button" aria-label="Fermer la photo">Fermer</button>
+        <img class="image-viewer-image" src="" alt="">
+        <p class="image-viewer-caption"></p>
+    </dialog>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-contacts">
+            <a href="tel:+243973318852"><span>Téléphone</span>+243 973318852</a>
+            <a href="https://wa.me/243973318852" target="_blank" rel="noopener noreferrer"><span>WhatsApp</span>+243 973318852</a>
+            <a href="mailto:juniortata2548@gmail.com"><span>E-mail</span>juniortata2548@gmail.com</a>
+        </div>
+        <p class="footer-copyright">&copy; 2026 Hôtel Le Grand Horizon. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Lien vers le fichier JavaScript externe -->
+    <script src="script.js"></script>
+</body>
+</html>
